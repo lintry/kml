@@ -546,6 +546,9 @@ function add_host (new_host, opts) {
     }
 
     list[name] = new_host;
+    if (!HOST_CFG.current) {
+        HOST_CFG.current = name;
+    }
     fs.writeJsonSync(KMLRC, rc_obj);
     console.info(chalk.green(new_host + ' has been added as "' + name + '"'))
 }
