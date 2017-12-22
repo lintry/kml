@@ -16,6 +16,7 @@
   "bin": {
     "kml": "bin/kml-cli.js"
   },
+  "preferGlobal": true,
   "dependencies": {
     "axios": "^0.15.3",
     "bluebird": "^3.4.7",

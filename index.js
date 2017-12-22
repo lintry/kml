@@ -1,1 +1,3 @@
-/Users/lintry/Documents/Git/kml/index.js
+#!/usr/bin/env node
+
+require('./bin/kml-cli');
