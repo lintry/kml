@@ -13,6 +13,11 @@
   "keywords": [],
   "author": "lintry <shenlin00@gmail.com>",
   "license": "MIT",
+  "files": [
+    "/*",
+    "!/.*",
+    "!/test"
+  ],
   "bin": {
     "kml": "bin/kml-cli.js"
   },
