@@ -9,13 +9,8 @@
 ## 安装
 
 ```sh
-git clone git@gitlab.kmlab.com:npms/kml.git
+npm install kml-cli -g
 cd kml
-#本地全局安装
-npm link
-
-#更新版本，同步更新git即可
-git pull origin master
 ```
 
 ## 使用
