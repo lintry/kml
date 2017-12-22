@@ -10,7 +10,6 @@
 
 ```sh
 npm install kml-cli -g
-cd kml
 ```
 
 ## 使用
