@@ -8,7 +8,7 @@ const path = require('path'),
     shell = require('shelljs'),
     api_sdk = require('../lib/api-sdk'),
     PKG = require('../package.json'),
-    Table = require('cli-table2'),
+    Table = require('cli-table3'),
     inquirer = require('inquirer')
 ;
 
