@@ -5,6 +5,7 @@ const path = require('path'),
     url_utils = require('url'),
     program = require('commander'),
     chalk = require('chalk'),
+    styles = require('ansi-styles'),
     shell = require('shelljs'),
     api_sdk = require('../lib/api-sdk'),
     PKG = require('../package.json'),
@@ -271,7 +272,7 @@ function _package_info(readonly) {
         shell.exec(`git tag ${version}`, {silent: true});
         let ret = shell.exec(`git push origin ${version}`, {silent: true});
         if (ret.code !== 0) {
-            console.error(chalk.styles.red.open, ret.stdout, chalk.styles.close);
+            console.error(styles.red.open, ret.stdout, styles.red.close);
             process.exit(-100);
         }
     }
@@ -379,7 +380,7 @@ function install(pkgs, opts) {
                     })
             })
             .catch(function (e) {
-                console.error(chalk.styles.red.open, e, chalk.styles.red.close);
+                console.error(styles.red.open, e, styles.red.close);
             });
     } else {
         console.info(chalk.yellow('NOTHING IS INSTALLED!'))
@@ -437,7 +438,7 @@ function publish(opts) {
         shell.exec(`git tag -f ${version}`, {silent: true});
         let ret = shell.exec(`git push origin -f ${version}`, {silent: true});
         if (ret.code !== 0) {
-            console.error(chalk.styles.red.open, ret.error, chalk.styles.close);
+            console.error(styles.red.open, ret.error, styles.red.close);
             return {};
         }
     }
@@ -500,6 +501,15 @@ function list_host(opts) {
                 })
             }
         }
+
+        if (name_list.length === 1) {
+            let prompt = name_list[0];
+            if (prompt.disabled) {
+                console.log('Current host is', styles.blue.open)
+                console.log(prompt.name, styles.blue.close)
+                return
+            }
+        }
         return inquirer.prompt([
             {
                 type: 'list',
@@ -508,13 +518,16 @@ function list_host(opts) {
                 choices: name_list
             }])
             .then(answers => {
-                if (answers.host) {
+                if (answers && answers.host) {
                     return use_host(answers.host)
                 } else {
                     console.warn(chalk.red('You choosed noting'))
                 }
 
 
+            })
+            .catch(err => {
+                console.error(chalk.red('Something is wrong'), err)
             })
     }
 }
